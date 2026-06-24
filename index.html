@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hub.41 + Mahogany Curitiba</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,300&family=DM+Serif+Display@400&display=swap');
+:root{
+  --white:#ffffff;--bg:#fafaf8;--amber:#C8991A;--amber-light:#F7EDCC;--amber-pale:#FDF8EC;
+  --ink:#19191b;--ink-70:#444448;--ink-45:#7a7a80;--ink-20:#d4d4d8;--ink-08:#f0f0f2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito Sans','Helvetica Neue',Arial,sans-serif;background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.6}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--ink-08);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.nb{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.nb span{color:var(--amber)}
+.nm{display:flex;gap:0;list-style:none}
+.nm a{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-45);text-decoration:none;padding:0 14px;line-height:52px;display:block;border-right:1px solid var(--ink-08);transition:color .2s}
+.nm a:hover{color:var(--ink)}
+.nm li:first-child a{border-left:1px solid var(--ink-08)}
+.sec{padding:100px 0}
+.sec--dk{background:var(--ink)}
+.sec--bg{background:var(--bg)}
+.w{max-width:1100px;margin:0 auto;padding:0 48px}
+.ey{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-45);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.ey::after{content:'';display:block;width:28px;height:1px;background:var(--ink-20)}
+.ey--w{color:rgba(255,255,255,.45)}
+.ey--w::after{background:rgba(255,255,255,.2)}
+.h1{font-family:'Nunito Sans',sans-serif;font-size:clamp(36px,5vw,64px);line-height:.97;font-weight:800;letter-spacing:-.04em;color:var(--ink)}
+.h1--w{color:var(--white)}
+.h2{font-family:'Nunito Sans',sans-serif;font-size:clamp(28px,3.8vw,48px);line-height:1;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.h2--w{color:var(--white)}
+.lead{font-size:16px;font-weight:300;line-height:1.75;color:var(--ink-70);max-width:640px;margin-top:20px}
+.lead--w{color:rgba(255,255,255,.55)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+/* GRID UTILS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.sp2{grid-column:span 2}
+.sp3{grid-column:span 3}
+/* CARDS */
+.card{background:var(--white);padding:40px}
+.card--dk{background:var(--ink)}
+.card--am{background:var(--amber)}
+.card--bg{background:var(--bg)}
+.card-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);margin-bottom:12px}
+.card--dk .card-label{color:rgba(255,255,255,.4)}
+.card--am .card-label{color:rgba(25,25,27,.55)}
+.card-title{font-size:18px;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.2;letter-spacing:-.01em}
+.card--dk .card-title{color:var(--white)}
+.card--am .card-title{color:var(--ink)}
+.card-body{font-size:13px;color:var(--ink-70);line-height:1.65}
+.card--dk .card-body{color:rgba(255,255,255,.5)}
+.card--am .card-body{color:rgba(25,25,27,.7)}
+/* PASSO */
+.passo{background:var(--white);padding:32px 24px}
+.passo-n{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45);margin-bottom:14px}
+.passo-t{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.1}
+.passo-b{font-size:12px;color:var(--ink-45);line-height:1.6}
+.passo-subs{margin-top:14px;display:flex;flex-direction:column;gap:5px}
+.passo-sub{font-size:11px;color:var(--ink-45);padding-left:12px;position:relative;line-height:1.4}
+.passo-sub::before{content:'—';position:absolute;left:0;color:var(--ink-20)}
+/* RANK */
+.rank-list{display:flex;flex-direction:column;gap:2px}
+.rank-item{display:grid;grid-template-columns:56px 1fr auto;align-items:stretch;background:var(--white)}
+.rank-num{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:var(--bg);color:var(--ink-45);padding:24px 0;letter-spacing:.06em}
+.rank-body{padding:22px 28px}
+.rank-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.rank-notes{font-size:12px;color:var(--ink-45);line-height:1.5}
+.rank-badge{padding:22px 24px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-45);white-space:nowrap;display:flex;align-items:center}
+/* REF */
+.ref-card{background:var(--white);padding:36px}
+.ref-card.case{background:var(--bg)}
+.ref-brand{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);margin-bottom:8px}
+.ref-title{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.2}
+.ref-body{font-size:13px;color:var(--ink-70);line-height:1.65;margin-bottom:14px}
+.ref-conv{margin-top:16px;padding-top:16px;border-top:1px solid var(--ink-08)}
+.ref-conv-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin-bottom:6px}
+.ref-conv-text{font-size:13px;color:var(--ink-70);line-height:1.6}
+/* CAL */
+.cal-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;margin-top:48px}
+.cal-m{background:var(--white);padding:26px}
+.cal-name{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);margin-bottom:10px}
+.cal-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.cal-body{font-size:12px;color:var(--ink-45);line-height:1.5}
+.cal-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.cal-tag{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;background:var(--ink-08);color:var(--ink-45)}
+/* FASE */
+.fase{background:var(--white);padding:0}
+.fase-hd{padding:32px 32px 20px}
+.fase-per{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);margin-bottom:6px}
+.fase-num{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1;margin-bottom:4px}
+.fase-tit{font-size:12px;font-weight:700;color:var(--ink-45);text-transform:uppercase;letter-spacing:.1em}
+.fase-miss{margin:0 32px 20px;padding:10px 14px;background:var(--ink-08);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-70)}
+.fase-items{padding:0 32px 32px;display:flex;flex-direction:column;gap:0}
+.fase-row{display:grid;grid-template-columns:72px 1fr;gap:0;border-top:1px solid var(--ink-08);padding:12px 0}
+.fase-who{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-20);padding-top:2px}
+.fase-who.hub{color:var(--ink-70)}
+.fase-who.fr{color:var(--ink-45)}
+.fase-text{font-size:13px;color:var(--ink-70);line-height:1.5}
+/* METRICA */
+.met{background:var(--white);padding:28px}
+.met-icon{font-size:18px;color:var(--ink);margin-bottom:10px;font-weight:900;line-height:1}
+.met-t{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.met-b{font-size:12px;color:var(--ink-45);line-height:1.5}
+/* EMBAIX */
+.emb-crit{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--ink-08)}
+.emb-crit:last-child{border-bottom:none}
+.emb-dot{width:5px;height:5px;background:var(--ink);border-radius:50%;flex-shrink:0;margin-top:6px}
+/* PLAYBOOK */
+.pb{background:var(--white);padding:36px}
+.pb-n{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);margin-bottom:12px}
+.pb-t{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.2}
+.pb-b{font-size:13px;color:var(--ink-70);line-height:1.6}
+/* PROXIMOS */
+.prox{display:flex;flex-direction:column;gap:2px;max-width:760px}
+.prox-row{display:grid;grid-template-columns:56px 1fr;align-items:stretch}
+.prox-num{background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.prox-c{background:var(--white);padding:24px 32px}
+.prox-t{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.prox-b{font-size:13px;color:var(--ink-45);line-height:1.6}
+.prox-u{display:inline-block;margin-top:6px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)}
+/* FINAL */
+.final-q{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(22px,3vw,40px);text-transform:uppercase;letter-spacing:.02em;line-height:1.2;color:var(--white);max-width:820px;margin-bottom:40px}
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--ink-08);padding:32px 0}
+.ft{max-width:1100px;margin:0 auto;padding:0 48px;display:flex;justify-content:space-between;align-items:center}
+.ft-b{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)}
+.ft-b span{color:var(--amber)}
+.ft-n{font-size:11px;color:var(--ink-20)}
+/* CREDENCIAL */
+.cred{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.08)}
+.cred-ic{font-size:16px;color:var(--white);flex-shrink:0;margin-top:2px}
+.cred-tx{font-size:13px;color:rgba(255,255,255,.6);line-height:1.4}
+@media(max-width:900px){nav{padding:0 20px}.nm{display:none}.w{padding:0 24px}.sec{padding:72px 0}.g2,.g3,.g4{grid-template-columns:1fr}.sp2,.sp3{grid-column:span 1}.cal-grid{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nb">Hub<span>.41</span> + Mahogany CWB</div>
+  <ul class="nm">
+    <li><a href="#objetivos">Objetivos</a></li>
+    <li><a href="#dossie">Dossiê</a></li>
+    <li><a href="#socias">Sócias</a></li>
+    <li><a href="#sistema">Sistema</a></li>
+    <li><a href="#fundacao">Fundação</a></li>
+    <li><a href="#calendario">Calendário</a></li>
+    <li><a href="#plano">Plano</a></li>
+  </ul>
+</nav>
+
+<!-- ========== COVER ========== -->
+<section id="cover" style="min-height:100vh;display:flex;align-items:center;background:var(--white)">
+  <div class="w" style="padding-top:52px">
+    <img src="data:image/png;base64,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7t27atWqmTNnjhgx4oYbbmjTpk1KSorVUI0XilatWl111VW33377k08++Y9//GPz5s3ffPON4PhRmk2aNMnJU1UWpQSoRSlZKlXXlL799tu33377f/7nf1q0aGF//AkJCcb7pLvvvjszM/Ozzz5zeC6AVqWhlA4ePDhv3ryRI0f26tWrdevWqqZQu3btK6+8cvjw4cb/OFfO4Yxt27YlJiaqOobdj1IC1KKUIpE62x27ppSfn//888937949KSlJ33SqVq3at2/fl19+uaioyJl5Afr4uJTefPPNO++8s2HDhs7MqEaNGr17937qqafWrFmje2ootVq2bOnM8Xy2m2++2fl/NGjlypWyC04pwWcoJUs+vqZ04sSJV1555dprr3X4C/iMHjPeGGVlZRUWFmqdoFrvvfeek6sUct9990lPXaM77rhDZFUfe+wxmyP3Xym9//77AwcODN5YK6VevXojRozYsWOHpjmidBo6dKjzB/OYMWOM/nf+3w3imhKgFqUUidTZru+a0vbt2413qBUrVpSaWojxB2z//v2apqkWpaSDd0spMzNTZORdu3ZVsvIhR48enTFjxqWXXioyHSvNmze///77ly9frnayKIWMo8j5A9g4oYqLiyklEZQSdKCULPnpmlIgEFiyZEmXLl2kZlSixMTEu+++e8+ePWonqxylpIN3S8kH15Ryc3OHDx8uMovoValSZeTIkQcOHFA1a5QqeXl5NWvWdPigLVeuXPC6KKUkglKCDpRSJFJnu9prSllZWc2aNZOaSzT69+9vvLYqnLJalJIOlFKslJTSrl27Bg0aVL58eZEpxOe222778MMP7c8dpUr37t2dP1afeOKJ4L9OKYmglKADpWTJB9eU/vnPf6anp0vNIiaJiYn3339/QUGBkomrRSnpQCnFymYp5efnDxkypGzZsiKDt69jx46LFi0KBAI2tw+lwbRp05w/RC+99NLQO3VKSQSlBB0opUikzvZ9+/bZHPmOHTuMNxZS449bSkrK+PHjleydQpSSDpRSrOIupe+++27KlClVq1YVGbZarVq1ev31123uIPwtOztb69NcS5SYmHj280goJRGUEnSglCKROttt3n333HPPSY1ciUaNGq1bt07VJtpHKeng3VKaPXu2yMi7dOkSx2iNU0nkKclatWnTxjgrbe4jfKm4uFjkTgrT/8dHKYmglKADpWTJi3ffHT58+Oqrr5YatkJly5Y1/tK45E4bSkkH75aSV64pGW8ZH330Ue/ebndO3bp1++ijj2zuJnzm4Ycfdv5QbNu2rek9OqUkglKCDpRSJFJne3zXlFatWuX8o360Mqrv0KFDyrc1VpSSDpRSrGIqpd27d1922WUi43TYLbfckpuba3NP4Q+rV69OSEhw+AhMSkr6/PPPTSOhlERQStCBUopE6myPo5SeeeYZqdFqVatWLaMAdWxu9CglHbxbSu7/PqUFCxZUqlRJZJAiUlJSpkyZ4pJL0JBSUFCQlpbm/OE3efLk8MFQSiIoJehAKVnyyt13RUVF1113ndRQHVC2bNn58+fr2+hzopR08G4pufmakvFGYeTIkSLDE9e2bdvs7Gybmwvv6tWrl/NHXYcOHUpMdEpJBKUEHSglS54opS+//LJ169ZS43RMQkKC4DPxKCUdKKVYnbOUCgsLu3btKjI2l6hQocLMmTNt7i+8aM6cOc4fb0lJSVZ/rCklEZQSdKCULLm/lD7++OPatWtLDdJ59957r+5NLxGlpAOlFKvIpZSbm3vhhReKDMxtrr/++qNHj9rcZXjI7t27k5OTnT/Spk2bZjUkSkkEpQQdKKVIpM72aD6n9Pbbb4v8bZDVr18/B/bdhFLSgVKKVYRSMt6aNGjQQGRU7tS8efNdu3bZ3Gh4gvHmOCMjw/ljLPLnBiklEZQSdKCULLn5mpLx3j0xMVFqeLKMd9jOHABnr7bITCklHfz3RIft27f77KGXSqSmpq5YscLmXsP9Hn/8ceePruTk5AMHDkQYFaUkglKCDpSSJdeW0qZNmypWrCg1Njd45plnHDsMvqeU9PBuKbnqmtKRI0fq1KkjMh5PeO6552xuN9xsw4YNZcqUcf64Ml4EIg+MUhJBKUEHSikSqbM9wt1327Ztq1y5stTA3GPhwoWOHQaUkg6UUqzCS+nbb7+9/PLLRQbjIYMGDeL9ky8VFhaK3HQazfP6KSURnOnQgVKy5MJrSnl5eXwaIah8+fKbN2925kiglHTwbim55+67fv36iYzEc7p37378+HGb+w63GTBggPPHUmpqauT77oIoJRGUEnSglCKROtv37dtX4nh+9atfSQ3JhapXrx7HV/TGgVLSwbul5JJrStOmTRMZhkf94he/OHjwoM2th3vMnz9f5EDKysqKZniUkghKCTpQSpFIne0lBsDAgQOlxuNa0XwXp32Ukg6UUqzOPtq3b99+/vnniwzDu+rXr89X0/qD8ScyNTXV+UOoZ8+eUY6QUhJBKUEHSsmSq+6+mzFjhtRgXM6Bb6SllHTwbinNnj1bZORdunQJjaFFixYiY/C6qlWrfvLJJzYPAMgKBALt2rVz/uCpVq3a4cOHoxwkpSSCUoIOlJIl95TSli1b+P+PrZQrV27btm1ajwRKSQfvlpL4NSXBN2E+ULt27Wg+ZwLXGjdunMiR849//CP6QVJKIigl6EApRSJ1tp/9OaXjx483atRIaiSecOGFF548eVLfYUAp6UApxSpYSrm5uaX8SwLsa9my5ddff63iKIbTtmzZUq5cOeePmT59+sQ0TkpJBKUEHSilSKTO9rM/p3TPPfdIDcNDhg0bpu8woJR0oJQgqH379koOYzjp5MmTTZs2df5oqVWrVn5+fkxDpZREUErQgVKy5Ia779auXSs1Bm9JSEjYvn27piOBUtKBUoKsG264IRAIKDmY4YxBgwaJHCpvvfVWrEOllERQStCBUopE6mwPXVPic9vRO/vz7mpRSjpQShA3atQoJQczHLB06VKRg6R///5xjJZSEkEpQQdKyZL4NaVnn31WagAe9cYbb+g4EiglHSgluMGrr76q5HiGVrm5uVWrVnX+8KhVq1ZhYWEcA6aURFBK0IFSikTqbM/Jyfnqq69SUlKkBuBRzZo103EYUEo6UEpwg4oVK+7atUvJIQ19OnXqJHJ4xHHfXRClJIJSgg6UkiXZa0ojR46U+tc9bfLkycqPBEpJB0oJLtG6dWutD8+ETZMmTRI5MO688864x0wpiaCUoAOlFInU2b5169bk5GSpf93TUlJS4rtZIgJKSQdKCe5h5z0xtNq2bVtiYqLzh0TdunWLioriHjalJIJSgg6UUiRSZ/uDDz4o9U/7wPPPP6/2MKCUdKCU4Crz589XcmBDoVOnTrVs2VLkeFi5cqWdkVNKIigl6EApRSJ1tterV0/qn/aBFi1aqD0MKCUdKCW4Smpqam5urpJjG6oMHTpU5GC45557bI6cUhJBKUEHSikSqbNdnwoVKrRp08Z4kzpx4sQVK1Z88MEHO3fuPHz4cPA2/f3792/dunXVqlULFiyYPn268Vp/0003eTHbli9frvAwoJR08G4pZWZmioxcRP369Xv16jV69OgJEyZMmzYtKytr0aJFxluxZcuWvfbaazNmzBg/fvyoUaP69et31VVXNWzYUHq8tnTu3FnJsQ0ljJdxkcOgUaNGdu67C6KURFBK0IFSikTqbFcuLS1t6NChRhrFtw579+6dPXv2b37zG+l5RMt4b6fwMKCUdPBuKfn7mlLNmjX79u377LPPGu+38vPz41ifjRs3Tpw4sU+fPsb/lPRsYvbiiy/aPDygRF5ensjxk5CQsG7dOvvjp5REUErQgVKKROpsV6VChQqDBw9+//33VS3I8ePH//73v7dr1056Zue2e/duVbOmlHSglNwjNTV1wIABRiR8+umnSjY35MMPP/zzn/98xRVXSE8xWlWqVDly5IjaRUAcunfvLnIADBs2TMn4KSURlBJ0oJQikTrb7WvVqtXUqVONsNG0Mtu2bbvtttukZxnJgw8+qGqylJIOlJIbNGzY8Pnnn//mm2+U7GkEeXl5EydOrF+/vvSMz+33v/+97tVAZNOnTxfZ+mbNmql6XjylJIJSgg6UkiXB71Oy48ILL3zttdcCgYADS5Sdnd23b1/pGZesRo0aqhaBUtKBUhJ0/vnn33rrrQsXLlSylTFZtGhRly5dpBfgHDZu3Oj8yiDI+LOSlJTk/KYnJCRs2rRJ1SwoJRGUEnSglCKROtvjU61atTlz5ji/SqtXr27SpIn07Euwfv16JROklHTwbil5/YkOw4YNO3jwoJJNjNvmzZu7desmvRKWOnbsKLs+pVZxcXF6errIpg8fPlzhRCglEZQSdKCUIpE62+PQtWtX2Xc/Dz/8sPQamI0YMULJ1CglHSgl5912223GmxgVu6fG2rVrXfuhx2XLlkkvT2lkvGiLbHezZs1OnTqlcCKUkghKCTpQSpFIne2xmjRpkvRSnTF37lzplfgZVV+sRCnp4N1S8uLdd02bNl2zZo2SjVMuKyurSpUq0itklp6eLr0wpc7q1asTEhKc3+syZcoovO8uiFISQSlBB0rJkic+p1SpUqVVq1ZJL9VPVqxYUbFiRelV+Ul2drb9SVFKOni3lGbPni0y8ripepyXPgcOHOjcubP0OpktWrRIemFKkYKCgrS0NJGNHj16tPLpUEoiKCXoQClZcn8p1atXb/v27dLrZLZ27drExETptfnR+PHj7c+IUtLBu6XkoWtKKSkpb7zxhpL9csDUqVOlF+xn2rVrJ70kpUivXr1EdrlVq1bFxcXKp0MpiaCUoAOlFInU2R6Niy666PDhw9IrVDLjzZn08vyoQ4cO9qdDKeng3VLyyjUl4yViz549SjbLMStWrDDqTnrlfqLkS0hxTnPmzBHZ33Llym3dulXHjCglEZQSdKCUIpE6288pIyMjPz9fenkimTlzpvQi/ejo0aM250Ip6eDdUvLENaXf/va3RUVFSnbKYZ9++mmdOnWk1+9HvXv3ll4P/9u9e3dycrLI/v75z3/WNClKSQSlBB0opUikzvbI2rZtW1hYKL0259a/f3/ppTpjxYoVNidCKeng3VJy/zUlVU99lLJ///7WrVtLr+KP9u7dK70efma8tc3IyBDZ2UsvvVTHfXdBlJIISgk6UEqW3Pk5pcaNGxcUFEivTVS++eabCy64QHrBznvyySdtToRS0sG7peTya0qTJ09WskGyvv7660suuUR6Lc8YOXKk9GL42eOPPy6yrYmJiTt27NA3L0pJBKUEHSilSKTOdispKSk7d+6UXpUYbN68WXrNzrvuuutszoJS0sG7peTm71OaMmWKkt1xg8LCQjd821L16tX1XXko5TZs2FCmTBmRbX366ae1To1SEkEpQQdKKRKps93KypUrpZckZuL34NWoUcPmFCglHbxbSq69pqTjYceyTpw40b59e+l1Pe+VV16RXgkfKioqatCggciGtm3bVvdbakpJBKUEHSglS267+27s2LHSSxKPL7/88vzzz5ddOuOF284UKCUdKCW1br75ZiX74jaHDh2qXr267Nr++te/ll4GHxowYIDIbiYmJn7++ee6Z0cpiaCUoAOlFInU2R6uU6dO0osRvwcffFB29ebNm2dn/JSSDt4tJRfefZeRkaFkU9xp1apVCQkJgstbtmxZlz9r1HPmz58vtZsTJ050YIKUkghKCTpQSpFIne0mFSpUyM3NlV6M+OXk5Mgu4EMPPWRn/JSSDt4tJbddU6pYsaLNq6buN3bsWNlF/utf/yq9Bv5h/EVITU0V2ccOHToEAgEH5kgpiaCUoAOlZMk9d99NmDBBejHsuuGGGwQXsEePHnYGTynpQCmpkpWVpWRHXE72A0uevqrvKkaoSD2oIykpybFnvlNKIigl6EApWXJJKTVt2vT06dPSi2HXmjVrBNewVatWdgZPKelAKSnRs2dP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wFeTo7kWVEIp7W4TOPhA4NhSTaNF9CglET57AYRLUEqWKCUdvFtKBqmRhzRt2lTHx8o1KSwsbNmypfSamfm4lM774eM0xguXku0Td/DgwcaNG0uv6Bnbt2/XNMdA8eHA0dcCRxecSabTObH9ruHM774WOPZ24OSnge++1jRIxIFSEkEpQQdKyRKlpIOnS6lt27ZSgw+59957lWyEbsbp06lTJ+nVKoFf774Luf7664uLi5VsoiAjk5o3by69lme0b99eejHgPZSSCEoJOlBKliglHTxdSvfdd5/U4M+2cuVKJXuhz+nTp3v37i29TiXz2fcplahHjx6FhYVKtlLE/v37L7zwQulV/NHLL78svR7wHkpJBKUEHSglS5SSDp4upaysLKnBny0tLc3lz8Hr2bOn9CJZ8vfddyHNmzfftWuXkt102KpVq6pXry69fj+qW7eu9HrAkyglEZQSdKCULFFKOni6lA4cOCA1eJMWLVoYK6lkR9Q6fvy4O2+6CxkzZozNObr/mlJQ5cqVly1bpmRbHfOXv/ylbNmy0iv3kylTpkgvCTyJUhJBKUEHSskSpaSDp0vpe3d8VCkoIyPj2LESvo9SUE5Ojuz380ajlFxTCkpISHjsscc88e4hPz+/b9++0gv2M7Vr1z5x4oT0wsCTKCURnnitg+dQSpYoJR28XkqCf//CGVmSlxfpG1ec9PHHHxvvLKWX5NxKw+eUTLp06eLyl5S33nqrZs2a0utkNnHiROmFgVdRSiIoJehAKVmilHTweilt375davwlatSokZJ52XH69GnjbUFSUpL0YkTF98++K1HFihUnTZrkwrcRxgtC//79pZenBGlpaR56Ij/chlIS4cKXOPgApWSJUtLB66VkcMl3vISkpqa++OKLSqYWh82bN7dq1Up6DWJQOkspKD09/c0331Sy7/YVFhYae5GSkiK9KiUTPKfgA5SSCEoJOlBKliglHXxQSo888ojUFCLo2LHjZ599pmSCUcrLyxs4cKD0vGNm/3NKs2fPlp6ELVdeeaXskx6MRnr66aerVKkivRKWWrZsKbg+8AFKSQSlBB0oJUuUkg4+KKUNGzZITSGysmXL3nXXXV9++aWSaUZQXFz87LPPpqamSs84HqXwc0olatKkyaxZs44fP67kkIhSdnb24MGD3X+j5qJFi5xcFvgPpSSCUoIOlJIlSkkHH5SSoWXLllKziIbRS9u2bVM12bMdPHhwzJgxdevWlZ5i/ErVs+/OqUKFCka6bNq0ScnhYaWgoOCll17q1q2b9HSjcvXVV2tdDZQGlJIISgk6UEqWKCUd/FFKU6dOlZpF9H75y1/OmDHjyJEj9ud7/PjxefPmue0hzvGx/31KfiqlkGbNmv3xj39855137B8tIR999NEzzzxz5ZVXSk8uBklJSXv27FG4CCidKCURlBJ0oJQsUUo6+KOUCgsLk5OTpSYSqw4dOhhvWNeuXRvrNLOzs40quPbaa6VnoBLXlCIzUqFnz55PP/30kiVLPv7445i+UKigoMB4l/bEE0/06NHDozdnjhs3zubhAXxPKQmhlKADpWSJUtLBH6VkGDJkiNRE7GjXrl2fPn3uuuuuUaNGjR8/ftasWa+//vrKlSsXL17897//ferUqU8++eTAgQPd8wW7yv3pT3+yufVef6JDrOrWrduxY0cjmG+66aY777xz2LBhjz322J/O8sADD3Tt2rVWrVrSI7WrdevWKl4bAEpJBqUEHSglS5SSDr4ppU8//VRqIv5w2WWXify73H2HEpUpU2br1q1KXhwASkkEpQQdKCVLlJIOviklQ5cuXaTm4nUXXnjhnXfeKfJPU0oo0aOPPqrkZQH4nlISQilBB0rJEqWkg59KacmSJVJz8TojNu644w6Rf5pSQriLL75YyWsCEEQpiaCUoAOlZIlS0sFPpWS4/PLLpabjXWlpacXFxVKlZP/7lCgln0lNTeV5d1CLUhJBKUEHSskSpaSDz0rpvffek5qOdxmlYSyd1N13PPsOZytbtuyqVatUvBgAP6GURFBK0IFSskQp6eCzUjL06NFDakZe1Lp160AgYKwb15TgBi+88IKKlwHgZyglEZQSdKCULFFKOvivlLZu3So1Iy967733guvGNSWIGzx4sN3zHygJpSSCUoIOlJIlSkkH/5WS4dZbb5WalLcMGDAgtGhcU4Ksa6+9lvdV0IRSEsEZDR0oJUuUkg6+LCXBPwweUrNmzfz8/NCieffZd5mZmSIjr1KlSqdOndLT00X+dZ+5/PLLT5w4YfNIAKxQSiIoJehAKVmilHTwZSkZpk2bJjUvr1i4cOHZK+bdUpK6ptS5c2fjXz958mStWrVEBuAbzZo1M16IbB4GQASUkghKCTpQSpYoJR38Wkrf82iHiIYMGWJaLu6+i1WwlL6Xu6jlD7Vr1963b5/NYwCIjFISQSlBB0rJEqWkg49LKS8vr2rVqlKzc7OMjIzTp0+blsu7pTR79myRkXfp0iU0BmNJRcbgdVWqVNm+fbvNAwA4J0pJBKUEHSglS5SSDj4uJcPixYulZudaxnvTnJyc8LXi2XexCl1TMuzZsyc5OVlkGN5lHIoff/yxzd0HokEpiaCUoAOlZIlS0sHfpfS9XAC41po1a1y1UP4oJcMrr7wiMgyPql69OleT4BhKSQSlBB0oJUuUkg6+L6VTp0517NhRao5uM3fuXKuF8u7dd1IfE+ratatpJEOHDhUZiefUr18/Ozvb5r4D0aOURFBK0IFSskQp6eD7UjIUFhbyKGfDqFGjIqwS15RiZbqmZDDeFlx33XUig/GQtm3b8qQ7OIxSEkEpQQdKyRKlpENpKCXDoUOHGjZsKDVTNxg+fHjkJfLuNSX3lNL3XMM8lxtvvNFYIps7DsSKUhJBKUEHSskSpaRDKSklg/HPValSRWqysqK5bkMpxarEUjIcP368TZs2IkNys8TExMmTJ9vcayA+lJIISgk6UEqWKCUdSk8pGT744IOUlBSp+Up59tlno1kc7r6LlVUpGY4ePUosna1x48Zbt261udFA3CglEZQSdKCULFFKOpSqUjJ89NFHNWrUkJqywxISEqZNmxblynBNKVYRSun7H2LpkksuERmY2/Tr1+/YsWM2dxmwg1ISQSlBB0rJEqWkQ2krJUN2dnbt2rWlZu2YMmXKvPzyy9EvC6UUq8il9P0PjxLp0aOHyNhcIiUlJSsry+b+AvZRSiIoJehAKVmilHQohaVk2L17d7169aQm7oDKlSuvXr06pjWhlGJ1zlIyBAKB0aNHiwxP3JVXXmm8RbO5uYASlJIISgk6UEqWKCUdSmcpGfbs2XPxxRdLzV2rjIyMffv2xbogUqU0ZswYm1vpnu9TsrJw4cJKlSqJDFJEtWrVZs2aZXNbAYUoJRGUEnSglCxRSjqU2lIKGjFihNT0NRk0aFB8S8ETHWIVzTWlEONoLyXPeDAOJL4uCW5DKYmglKADpWSJUtKhlJeSYf369Y0aNZJaBIXq16+/fPnyuNeBu+9iFVMpGYqLi43JlilTRmS0Drj++ut37NhhczcBHSglEZQSdKCULFFKOlBK3//wBThSV1RUuffee20+Xsy715Rmz54tMvIuXbrEMdq1a9c2b95cZMD6GEuxceNGm/sI6EMpiaCUoAOlZIlS0oFSCjHewrZq1UpqNeLWunXr9evX25++d0vJK9eUQoqLiydPnuyP70Fu27btv/71L5s7COhGKYmglKADpWSJUtKBUjqbcYwZb2G98u20VatWfeGFF1T9KeLuu1jFXUpBR44cGTx4sEdvxktISOjZsyeNBK+glERQStCBUrJEKelAKYXLzc296aabpJYlSkbYqP3cPNeUYmWzlIJ27dp11113JSYmikwhDklJSUbgZWdn25874BhKSQSlBB0oJUuUkg6UkpWcnJwHH3ywcuXKUutToho1ajz66KOHDx9WPl+uKcVKSSkFGXH+0EMPpaWliUwkSsbwnnzyyfz8fFWzBhxDKYmglKADpWSJUtKBUoqsqKhoxowZF1xwgdQqhWRkZGRmZuqbqXevKbn/+5SiN3fu3G7duolMJ4L+/fsvW7ZM+WQBx1BKIigl6EApWaKUdKCUorRx48aHHnqocePGDq9SkyZNRo8e7cDDl7mmFCuF15RMCgoKZs2a1b17d5F5BVWvXv32229/7bXXjh8/rmmagGMoJRGUEnSglABX27Rp08iRIy+++GKtf2Datm07fPjwdevWSU8Xko4ePZqVlWUUS7NmzbQeb0FGlt9yyy0TJ07cvHmz9NQBACgBpQR4g/EudtmyZaNHj+7cubP9N6mNGzfu0aPH2LFjV65ceeLECenJwXXy8vIWLVo0YsSIq666Kikpyf4hZ2jYsOE111zz2GOPGUdyQUGB9BQBADgHSgnwpC+++OLdd9+dOXPmI4888rvf/a5jx46XXnpp8+bN69SpE3zseGpqarNmzTp06NC7d++7777beHtq/Jf/9a9/eesuRLhE8HibPn260er33HPPzTff3K1bt7Zt2xqHXI0aNc7OISOr6tWrl56e/utf/3rw4METJkz45z//uX37dukZAAAQM0oJAAAAAMwoJQAAAAAwo5QAAAAAwIxSAgAAAAAzSgkAAAAAzCglAAAAADCjlAAAAADAjFICAAAAADNKCQAAAADMKCUAAAAAMKOUAAAAAMCMUgIAAAAAM0oJAAAAAMwoJQAAAAAwo5QAAAAAwIxSAgAAAAAzSgkAAAAAzCglAAAAADCjlAAAAADAjFICAAAAADNKCQAAAADMKCUAAAAAMKOUAAAAAMCMUgIAAAAAM0oJAAAAAMwoJQAAAAAwo5QAAAAAwIxSAgAAAAAzSgkAAAAAzCglAAAAADCjlAAAAADAjFICAAAAADNKCQAAAADMKCUAAAAAMKOUAAAAAMCMUgIAAAAAM0oJAAAAAMwoJQAAAAAwo5QAAAAAwIxSAgAAAAAzSgkAAAAAzCglAAAAADCjlAAAAADAjFICAAAAADNKCQAAAADMKCUAAAAAMKOUAAAAAMCMUgIAAAAAM0oJAAAAAMwoJQAAAAAwo5QAAAAAwIxSAgAAAAAzSgkAAAAAzCglAAAAADCjlAAAAADAjFICAAAAADNKCQAAAADM/g9choHZQgrs3gAAAABJRU5ErkJggg==" alt="hub.41" style="height:52px;display:block;margin-bottom:80px">
+    <h1 class="h1" style="max-width:760px;margin-bottom:52px">Como a Mahogany<br>Curitiba pode<br>fazer história?</h1>
+    <div style="display:flex;flex-direction:column;gap:5px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-45)">Sistema Operacional Hub</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-45)">Mahogany Curitiba</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-45)">Junho de 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== OBJETIVOS ========== -->
+<section class="sec sec--dk" id="objetivos">
+  <div class="w">
+    <div class="ey ey--w reveal">Objetivos</div>
+    <h2 class="h2 h2--w reveal" style="margin-bottom:48px">vamos criar um sistema<br>que transforma seus<br>diferenciais em vendas.</h2>
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:0;border-top:1px solid rgba(255,255,255,.1);margin-top:48px">
+      <div style="padding:56px 56px 56px 0;border-right:1px solid rgba(255,255,255,.12)" class="reveal">
+        <div style="font-size:clamp(17px,2vw,22px);font-weight:300;color:rgba(255,255,255,.85);line-height:1.65;letter-spacing:-.01em">A prioridade é fazer a loja vender mais, com um posicionamento melhor, mais constância nos conteúdos, transformando o Instagram e o WhatsApp em canal de conversão e fazendo o CRM trabalhar de forma autônoma — gerando recompra mesmo fora do horário de atendimento.</div>
+      </div>
+      <div style="padding:56px 0 56px 56px;display:flex;flex-direction:column;justify-content:center" class="reveal">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px">Nosso Método</div>
+        <div style="font-size:17px;font-weight:400;color:rgba(255,255,255,.8);line-height:1.7">A Hub organiza a verdade estratégica da empresa, transforma isso em narrativa reconhecível, cria um sistema de conteúdo, conecta com venda e melhora tudo a cada ciclo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DOSSIE ========== -->
+<section class="sec sec--bg" id="dossie">
+  <div class="w">
+    <div class="ey reveal">Dossiê da loja</div>
+    <h2 class="h2 reveal">mahogany<br>curitiba.</h2>
+    <p class="lead reveal">1 ano e 4 meses de operação, base de clientes crescendo e dois perfis complementares à frente da franquia. O que falta é método para transformar esses ativos em receita previsível.</p>
+    <div class="g3" style="margin-top:48px">
+      <div class="card reveal">
+        <div class="card-label">Tempo de operação</div>
+        <div style="font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-.04em;margin-bottom:8px">1a 4m</div>
+        <div class="card-body">Franquia com 1 ano e 4 meses. Base de clientes crescendo desde a abertura.</div>
+      </div>
+      <div class="card card--am reveal">
+        <div class="card-label">Sócias</div>
+        <div style="font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-bottom:8px;line-height:1.2">Milena Baptista<br><span style="font-weight:400;font-size:16px">Sandra Boeing</span></div>
+        <div class="card-body">Milena: autoridade técnica como farmacêutica. Sandra: ativo de relacionamento com maturidade e repertório alinhados ao perfil da cliente ideal.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-label">Motivo de compra</div>
+        <div style="font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-.04em;margin-bottom:8px">Presente</div>
+        <div class="card-body">A compra majoritária é para presentear, não para uso pessoal. Isso muda o conteúdo, o script e o CRM de ponta a ponta.</div>
+      </div>
+      <div class="card card--dk sp2 reveal">
+        <div class="card-label">Programa de fidelidade</div>
+        <div style="font-size:24px;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-bottom:8px">Mahogany Lovers</div>
+        <div class="card-body">Existe. Está subutilizado. É o maior ativo não explorado da loja — uma lista de clientes qualificadas que compraram, gostaram e precisam ser lembradas de voltar.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-label">Canais ativos</div>
+        <div style="font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:8px;line-height:1.4">Instagram<br>WhatsApp<br>Loja física</div>
+        <div class="card-body">CRM e e-mail subaproveitados. WhatsApp com volume mas sem script. Instagram sem funil de conversão.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ATIVOS + QUALIDADE ========== -->
+<section class="sec" id="ativos">
+  <div class="w">
+    <div class="ey reveal">Grandes ativos + Resumo de qualidade</div>
+    <h2 class="h2 reveal">o que torna a<br>mahogany única.</h2>
+    <p class="lead reveal">Tudo que a marca já entrega e o conteúdo precisa dizer.</p>
+
+    <!-- STAR CARD -->
+    <div style="background:var(--amber);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:48px" class="reveal">
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(25,25,27,.55);margin-bottom:12px">Ativo principal</div>
+        <div style="font-size:clamp(16px,2vw,20px);font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:16px">Perfumistas que assinam para Chanel, YSL e Gucci — e para a Mahogany.</div>
+        <div style="font-size:13px;color:rgba(25,25,27,.7);line-height:1.65">Nathalie Lorson assinou para YSL Black Opium, Flora by Gucci, Dior — e também para a Mahogany. Roland Theil e Fanny Grau completam o time. Isso elimina a objeção "mas é nacional" com um argumento rastreável e irrefutável.</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(25,25,27,.55);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px">Perfumistas por produto</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);padding:12px 0;border-bottom:1px solid rgba(25,25,27,.15)">Nathalie Lorson <span style="font-weight:400;color:rgba(25,25,27,.6)">— Linha Experience, seleção feminina</span></div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);padding:12px 0;border-bottom:1px solid rgba(25,25,27,.15)">Roland Theil <span style="font-weight:400;color:rgba(25,25,27,.6)">— Stark + linha masculina</span></div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);padding:12px 0">Fanny Grau <span style="font-weight:400;color:rgba(25,25,27,.6)">— Linha Experience (seleção)</span></div>
+      </div>
+    </div>
+
+    <!-- QUALITY GRID -->
+    <div class="g3" style="margin-top:2px">
+      <div class="card reveal">
+        <div class="card-label">Ingredientes internacionais</div>
+        <div class="card-title">Parceiros globais Firmenich e DSM</div>
+        <div class="card-body">Mesmos fornecedores das marcas de luxo. A procedência é rastreável e irrefutável.</div>
+        <div style="margin-top:14px;padding:8px 12px;background:var(--ink-08);font-size:11px;color:var(--ink-70);font-weight:600">→ Anti-objeção nacional</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-label">Embalagem como produto</div>
+        <div class="card-title">Elogiada antes de abrir</div>
+        <div class="card-body">Design pensado para ser entregue sem embrulho adicional. Percepção de valor acima do esperado.</div>
+        <div style="margin-top:14px;padding:8px 12px;background:var(--ink-08);font-size:11px;color:var(--ink-70);font-weight:600">→ Argumento principal de presente</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-label">Linha vegana e sustentável</div>
+        <div class="card-title">Alumínio reciclável, fórmulas sem origem animal</div>
+        <div class="card-body">Essência biodegradável. Abre conversa com consumidora consciente sem abrir mão de sofisticação.</div>
+        <div style="margin-top:14px;padding:8px 12px;background:var(--ink-08);font-size:11px;color:var(--ink-70);font-weight:600">→ Consumidora consciente</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-label">35 anos de marca</div>
+        <div class="card-title">Fundada em 1991, 200+ lojas</div>
+        <div class="card-body">Longevidade é prova de mercado. Produto que se sustenta não é moda — é confiança construída.</div>
+        <div style="margin-top:14px;padding:8px 12px;background:var(--ink-08);font-size:11px;color:var(--ink-70);font-weight:600">→ Credibilidade e autoridade</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-label">Mahogany Lovers</div>
+        <div class="card-title">Programa próprio de fidelidade</div>
+        <div class="card-body">Base acumulada de clientes qualificadas. Maior ativo não explorado — esperando reativação com método.</div>
+        <div style="margin-top:14px;padding:8px 12px;background:var(--ink-08);font-size:11px;color:var(--ink-70);font-weight:600">→ CRM e recompra</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-label">Fragrâncias com narrativa</div>
+        <div class="card-title">Produtos que contam histórias</div>
+        <div class="card-body">Nomes como "Uma Tarde na Toscana" e a Linha Experience criam narrativa sensorial. Cada produto tem uma história — e história vende mais do que descrição.</div>
+        <div style="margin-top:14px;padding:8px 12px;background:var(--ink-08);font-size:11px;color:var(--ink-70);font-weight:600">→ Conteúdo e storytelling</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== PÚBLICO ALVO ========== -->
+<section class="sec sec--bg" id="publico">
+  <div class="w">
+    <div class="ey reveal">Análise de público</div>
+    <h2 class="h2 reveal">ela não está<br>comprando perfume.</h2>
+    <p class="lead reveal">Mulher 40–80 anos, classe B/C, que compra para presentear. Entender o que ela realmente quer — além do produto — é a base de todo o sistema editorial e de vendas.</p>
+    <div class="g2" style="margin-top:48px">
+      <div style="background:var(--ink);padding:48px" class="reveal">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px">O que ela busca além do perfume</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)"><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px">Reconhecimento como alguém que entende</div><div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">Ela quer ser a pessoa que escolheu o presente incrível, que conhece uma marca boa antes de todo mundo.</div></div>
+          <div style="padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)"><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px">Atenção real, sem pressa</div><div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">Quer ser ouvida. Quer que entendam o perfil de quem vai receber. O atendimento que resolve isso fideliza.</div></div>
+          <div style="padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)"><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px">Segurança na escolha</div><div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">O maior medo: errar no presente. A loja que elimina esse medo com curadoria é a que ela volta.</div></div>
+          <div style="padding:16px 0"><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px">Memória afetiva e vínculo</div><div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">Ela volta pelo cheiro, pela embalagem elogiada, por ser tratada pelo nome. Emoção se constrói com conteúdo.</div></div>
+        </div>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:2px">
+        <div class="card">
+          <div class="card-label">A objeção real</div>
+          <div class="card-title">"Mas é nacional…"</div>
+          <div class="card-body">Não é o preço que impede — é a percepção de inferioridade. Combate-se com argumento rastreável: perfumistas da Firmenich, 35 anos de marca. Conteúdo educativo, não desconto.</div>
+        </div>
+        <div class="card card--am">
+          <div class="card-label">O que a faz indicar</div>
+          <div class="card-title">Sentir que descobriu antes das outras</div>
+          <div class="card-body">Ela indica quando tem repertório para contar. Quando sabe que o perfume foi criado pelo mesmo nariz que faz Chanel. O conteúdo educativo dá esse repertório.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SÓCIAS ========== -->
+<section class="sec" id="socias">
+  <div class="w">
+    <div class="ey reveal">As sócias</div>
+    <h2 class="h2 reveal">as sócias que<br>se complementam.</h2>
+    <p class="lead reveal">Dois perfis distintos, um mesmo objetivo. A combinação entre autoridade técnica e maturidade de relacionamento é o diferencial humano da franquia.</p>
+    <div class="g3" style="margin-top:48px">
+      <div class="card reveal">
+        <div class="card-label">Milena Baptista</div>
+        <div style="font-size:20px;font-weight:800;color:var(--ink);margin-bottom:16px;letter-spacing:-.02em">Autoridade técnica</div>
+        <div class="card-body" style="margin-bottom:20px">Formação em farmácia. Fala de ingredientes, notas olfativas e composição com propriedade real. O ativo que vai construir posicionamento de especialista — com consistência, não com volume.</div>
+        <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid var(--ink-08);padding-top:16px">
+          <div style="font-size:12px;color:var(--ink-70);padding:8px 0;border-bottom:1px solid var(--ink-08)">Liderança operacional da criação de conteúdo</div>
+          <div style="font-size:12px;color:var(--ink-70);padding:8px 0;border-bottom:1px solid var(--ink-08)">Porta-voz nas redes sociais</div>
+          <div style="font-size:12px;color:var(--ink-70);padding:8px 0">Autoridade que constrói comunidade</div>
+        </div>
+      </div>
+      <div class="card card--dk reveal">
+        <div class="card-label">Sandra Boeing</div>
+        <div style="font-size:20px;font-weight:800;color:var(--white);margin-bottom:16px;letter-spacing:-.02em">Ativo de relacionamento</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:20px">Maturidade, repertório de vida e capacidade de criar vínculos com o perfil da cliente ideal. Não precisa assumir papel de influenciadora — sua força está na presença e no atendimento.</div>
+        <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,.1);padding-top:16px">
+          <div style="font-size:12px;color:rgba(255,255,255,.4);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)">Suporte estratégico e de retaguarda</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)">Presença nos eventos e atendimento presencial</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);padding:8px 0">Ancora autoridade com experiência real</div>
+        </div>
+      </div>
+      <div class="card card--am reveal">
+        <div class="card-label">Nossa recomendação</div>
+        <div style="font-size:18px;font-weight:800;color:var(--ink);margin-bottom:16px;letter-spacing:-.02em;line-height:1.2">Como usar esses ativos</div>
+        <div style="font-size:13px;color:rgba(25,25,27,.7);line-height:1.65;margin-bottom:20px">A autoridade técnica cresce com consistência de conteúdo educativo. O ativo de relacionamento se fortalece em eventos e CRM. Cada uma no seu território. As duas somando o mesmo resultado.</div>
+        <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(25,25,27,.15);padding-top:16px">
+          <div style="font-size:12px;color:rgba(25,25,27,.7);padding:8px 0;border-bottom:1px solid rgba(25,25,27,.12)">Milena: conteúdo educativo + presença digital</div>
+          <div style="font-size:12px;color:rgba(25,25,27,.7);padding:8px 0;border-bottom:1px solid rgba(25,25,27,.12)">Sandra: eventos + CRM + atendimento</div>
+          <div style="font-size:12px;color:rgba(25,25,27,.7);padding:8px 0">Ritual de stories diários — produto do dia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CRENÇAS ========== -->
+<section class="sec sec--bg" id="crencas">
+  <div class="w">
+    <div class="ey reveal">Crenças a combater</div>
+    <h2 class="h2 reveal">o que trava a<br>venda antes de<br>ela começar.</h2>
+    <p class="lead reveal">Cada crença abaixo é um conteúdo, um argumento de WhatsApp, uma fala de atendimento. Combater crença é dar ao cliente uma narrativa melhor sobre o produto.</p>
+    <div style="display:flex;flex-direction:column;gap:2px;margin-top:48px;max-width:860px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--white)" class="reveal">
+        <div style="padding:28px 32px;background:var(--bg)"><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-45);margin-bottom:8px">Crença limitante</div><div style="font-size:14px;color:var(--ink-70);line-height:1.6">"Perfume nacional não tem a mesma qualidade do importado."</div></div>
+        <div style="padding:28px 32px;border-left:3px solid var(--ink)"><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-70);margin-bottom:8px">A verdade que vende</div><div style="font-size:14px;color:var(--ink);font-weight:500;line-height:1.6">Os mesmos perfumistas da Firmenich que criaram para YSL, Gucci e Chanel assinaram para a Mahogany. O nariz é o mesmo. O preço é diferente.</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--white)" class="reveal">
+        <div style="padding:28px 32px;background:var(--bg)"><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-45);margin-bottom:8px">Crença limitante</div><div style="font-size:14px;color:var(--ink-70);line-height:1.6">"É caro demais para dar de presente para alguém que não sei se vai usar."</div></div>
+        <div style="padding:28px 32px;border-left:3px solid var(--ink)"><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-70);margin-bottom:8px">A verdade que vende</div><div style="font-size:14px;color:var(--ink);font-weight:500;line-height:1.6">A embalagem já vale a compra — elogiada antes de abrir. A curadoria elimina o risco de errar: escolhemos o perfume certo para o perfil certo.</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--white)" class="reveal">
+        <div style="padding:28px 32px;background:var(--bg)"><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-45);margin-bottom:8px">Crença limitante</div><div style="font-size:14px;color:var(--ink-70);line-height:1.6">"Não sei escolher perfume para outra pessoa."</div></div>
+        <div style="padding:28px 32px;border-left:3px solid var(--ink)"><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-70);margin-bottom:8px">A verdade que vende</div><div style="font-size:14px;color:var(--ink);font-weight:500;line-height:1.6">A curadoria existe para isso. Três perguntas certas e o risco de errar cai a quase zero. Esse é o produto — não o perfume, mas a segurança da escolha.</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--white)" class="reveal">
+        <div style="padding:28px 32px;background:var(--bg)"><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-45);margin-bottom:8px">Crença limitante</div><div style="font-size:14px;color:var(--ink-70);line-height:1.6">"Ser revendedora é para quem tem muito tempo ou precisa de renda desesperadamente."</div></div>
+        <div style="padding:28px 32px;border-left:3px solid var(--ink)"><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-70);margin-bottom:8px">A verdade que vende</div><div style="font-size:14px;color:var(--ink);font-weight:500;line-height:1.6">Ser revendedora Mahogany é ter curadoria de produto e credencial de especialista em perfumaria. Com método, qualquer mulher com rede de relacionamento pode construir renda com marca estabelecida.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SISTEMA HUB 5 PASSOS ========== -->
+<section class="sec" id="sistema">
+  <div class="w">
+    <div class="ey reveal">Sistema Hub aplicado</div>
+    <h2 class="h2 reveal">os 5 passos que<br>transformam a loja<br>em sistema.</h2>
+    <p class="lead reveal">Da imersão ao ciclo contínuo de inteligência. Cada passo é uma entrega concreta e um degrau em direção a crescimento previsível.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:56px">
+      <div class="passo reveal">
+        <div class="passo-n">Passo 01</div>
+        <div class="passo-t">Fundação</div>
+        <div class="passo-b">Posição comercial proprietária. Sair de "qualidade que surpreende" para uma tese que nenhum concorrente copia.</div>
+        <div class="passo-subs">
+          <div class="passo-sub">Frase de posicionamento</div>
+          <div class="passo-sub">Inimigos narrativos</div>
+          <div class="passo-sub">Proporção de públicos</div>
+        </div>
+      </div>
+      <div class="passo reveal">
+        <div class="passo-n">Passo 02</div>
+        <div class="passo-t">Mundo</div>
+        <div class="passo-b">Universo reconhecível da loja: clima visual, tom de voz, Big Idea que organiza tudo.</div>
+        <div class="passo-subs">
+          <div class="passo-sub">Big Idea definida</div>
+          <div class="passo-sub">Estética visual</div>
+          <div class="passo-sub">Tom de voz por plataforma</div>
+        </div>
+      </div>
+      <div class="passo reveal">
+        <div class="passo-n">Passo 03</div>
+        <div class="passo-t">Sistema</div>
+        <div class="passo-b">Operação editorial organizada: 5 editorias, grade semanal, padrão mínimo de qualidade.</div>
+        <div class="passo-subs">
+          <div class="passo-sub">5 editorias com função</div>
+          <div class="passo-sub">Grade semanal</div>
+          <div class="passo-sub">Padrão de qualidade</div>
+        </div>
+      </div>
+      <div class="passo reveal">
+        <div class="passo-n">Passo 04</div>
+        <div class="passo-t">Receita</div>
+        <div class="passo-b">Transformar atenção em venda. CTA em todo conteúdo, CRM com régua, WhatsApp com script.</div>
+        <div class="passo-subs">
+          <div class="passo-sub">Mapa de ofertas</div>
+          <div class="passo-sub">Script WhatsApp</div>
+          <div class="passo-sub">Régua CRM</div>
+        </div>
+      </div>
+      <div class="passo reveal">
+        <div class="passo-n">Passo 05</div>
+        <div class="passo-t">Inteligência</div>
+        <div class="passo-b">Ciclo mensal: hipótese, execução, leitura e ajuste. Aprende a cada ciclo, nunca começa do zero.</div>
+        <div class="passo-subs">
+          <div class="passo-sub">Checkpoint mensal</div>
+          <div class="passo-sub">Painel de métricas</div>
+          <div class="passo-sub">Decisões em dados</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FUNDAÇÃO INLINE -->
+    <div style="margin-top:3px;background:var(--ink);padding:64px 48px">
+      <div class="ey ey--w reveal">Fundação</div>
+      <h2 class="h2 h2--w reveal" style="margin-bottom:20px">a loja onde a<br>história do cliente<br>é o produto.</h2>
+      <p style="font-size:15px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.5);max-width:640px;margin-bottom:48px" class="reveal">O posicionamento que nenhuma rede nacional replica localmente. Cada compra carrega uma razão — a Mahogany Curitiba é o lugar onde essa razão encontra o produto certo.</p>
+
+      <div class="g3" style="margin-top:0">
+        <div style="background:var(--amber);padding:36px" class="reveal">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(25,25,27,.55);margin-bottom:12px">Big Idea</div>
+          <div style="font-family:'DM Serif Display',Georgia,serif;font-size:clamp(18px,2vw,24px);text-transform:uppercase;letter-spacing:.02em;line-height:1.15;color:var(--ink);margin-bottom:12px">Todo presente carrega uma história.</div>
+          <div style="font-size:13px;color:rgba(25,25,27,.7);line-height:1.65">Não é slogan — é o filtro de cada decisão editorial e de cada script de venda.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.06);padding:36px" class="reveal">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px">O modelo de atendimento</div>
+          <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.2">Ouvir antes de vender.</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.65">A recomendação é perguntar a história por trás da compra. Quem presenteia alguém que está recomeçando não quer um perfume — quer o símbolo certo.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.06);padding:36px" class="reveal">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px">A referência de proximidade</div>
+          <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.2">Rolim (TAM) e Junior Durski (Madero).</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.65">Líderes que fizeram o cliente sentir acesso direto à liderança. Proximidade que não se escala em rede — só a loja local tem.</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.04);padding:40px;margin-top:3px" class="reveal">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px">Como essa narrativa vira conteúdo</div>
+        <div class="g2">
+          <div style="background:rgba(255,255,255,.05);padding:22px" class="reveal"><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px">"Por Dentro da Fragrância"</div><div style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.6">Formação em farmácia como ponto de partida: notas olfativas, ingredientes, curiosidades. Autoridade que cresce com consistência.</div></div>
+          <div style="background:rgba(255,255,255,.05);padding:22px" class="reveal"><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px">"Como Escolher Sem Errar"</div><div style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.6">Curadoria de presente por perfil: para a sogra, para quem já tem tudo, para amigo secreto. Elimina o medo de errar.</div></div>
+          <div style="background:rgba(255,255,255,.05);padding:22px" class="reveal"><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px">"Memória e Cheiro"</div><div style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.6">Clientes contam a história delas com a Mahogany. Memória olfativa que atravessa gerações. Prova social com alma.</div></div>
+          <div style="background:rgba(255,255,255,.05);padding:22px" class="reveal"><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px">Ritual de stories diário</div><div style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.6">Produto do dia em story. Câmera frontal, loja ao fundo. Constância cria comunidade — o seguidor espera o próximo.</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- EDITORIAS -->
+    <div style="margin-top:3px">
+      <div style="background:var(--bg);padding:28px 32px;border-bottom:1px solid var(--ink-08)"><div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45)">As 5 editorias semanais</div></div>
+      <div class="rank-list">
+        <div class="rank-item"><div class="rank-num">Seg</div><div class="rank-body"><div class="rank-name">Universo Mahogany</div><div class="rank-notes">Bastidores de loja, vitrine, produto do dia, universo sensorial. Conteúdo leve para abrir a semana com presença e calor.</div></div><div class="rank-badge">Relacionamento</div></div>
+        <div class="rank-item"><div class="rank-num">Ter</div><div class="rank-body"><div class="rank-name">Presente com História</div><div class="rank-notes">Guias de ocasião, kits, curadoria por perfil. A editoria que gera mais intenção de compra direta. CTA direto para WhatsApp.</div></div><div class="rank-badge">Conversão</div></div>
+        <div class="rank-item"><div class="rank-num">Qua</div><div class="rank-body"><div class="rank-name">Universo Mahogany — sensorial</div><div class="rank-notes">Vitrine da semana, produto em destaque, experiência visual e sensorial. Conteúdo quase sem texto. A câmera mostra o que a loja cheira, parece e sente.</div></div><div class="rank-badge">Relacionamento</div></div>
+        <div class="rank-item"><div class="rank-num">Qui</div><div class="rank-body"><div class="rank-name">Universo Mahogany — destaques</div><div class="rank-notes">Produto em destaque, promoção ativa, kit especial. O universo sensorial com tom de oportunidade: "essa semana tem algo para você."</div></div><div class="rank-badge">Conversão</div></div>
+        <div class="rank-item"><div class="rank-num">Sex</div><div class="rank-body"><div class="rank-name">Mahogany Lovers</div><div class="rank-notes">Fidelização, promoções ativas, engajamento. Roleta de desconto, desafio da semana, convite ao evento, dica exclusiva para Lovers.</div></div><div class="rank-badge">Fidelização</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px">
+        <div style="background:var(--white);padding:28px 32px"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);margin-bottom:8px">Ritual de stories — produto do dia</div><div style="font-size:13px;color:var(--ink-70);line-height:1.6">Um produto diferente a cada dia em story. Câmera frontal, loja ao fundo, voz natural. Constância cria hábito. Produção em blocos semanais — não um por dia.</div></div>
+        <div style="background:var(--white);padding:28px 32px"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);margin-bottom:8px">Revenda — abordagem leve no feed</div><div style="font-size:13px;color:var(--ink-70);line-height:1.6">Aparece organicamente no conteúdo. Ações diretas de captação ficam em dark posts, segmentados, fora do feed principal. As duas frentes não se misturam.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== REFERÊNCIAS ========== -->
+<section class="sec" id="referencias">
+  <div class="w">
+    <div class="ey reveal">4 Cases de referência</div>
+    <h2 class="h2 reveal">o que o mundo<br>já provou que<br>funciona.</h2>
+    <p class="lead reveal">Quatro cases com sinergia direta. Não é copiar — é identificar o que foi testado e aplicar com a voz e a realidade da loja.</p>
+    <div class="g2" style="margin-top:56px">
+      <div class="ref-card case reveal">
+        <div class="ref-brand">Case 01 — Jo Malone London</div>
+        <div class="ref-title">Transformar fragrância em experiência de presente</div>
+        <div class="ref-body">Construiu a marca inteiramente em torno do ato de presentear — embalagem icônica, fita preta, combinação de fragrâncias como personalização. Não vende perfume: vende "o presente elegante que sempre funciona". Treina equipe como especialistas em "fragrance combining".</div>
+        <div class="ref-conv"><div class="ref-conv-label">Convergência</div><div class="ref-conv-text">Usar a curadoria da loja como Jo Malone usa: "fragrance expert" + eventos de curadoria + Lovers como programa de intimidade, não de desconto.</div></div>
+      </div>
+      <div class="ref-card reveal">
+        <div class="ref-brand">Case 02 — Sephora Beauty Insider</div>
+        <div class="ref-title">Transformar programa de fidelidade em comunidade emocional</div>
+        <div class="ref-body">34 milhões de membros. As clientes participam pela sensação de "insider", de pertencer. O programa tem tiers onde o benefício principal não é preço — é acesso, eventos privados e consultoria especializada. Clientes do programa gastam 2x mais.</div>
+        <div class="ref-conv"><div class="ref-conv-label">Convergência</div><div class="ref-conv-text">Reativar o Mahogany Lovers como programa de status — não de desconto. Lovers e Lovers Ouro. O tier ouro: convite para o Encontro, acesso antecipado a novidades.</div></div>
+      </div>
+      <div class="ref-card case reveal">
+        <div class="ref-brand">Case 03 — Funmi Monet / Professor Perfume</div>
+        <div class="ref-title">A especialista que educa vira canal de venda</div>
+        <div class="ref-body">@FunmiMonet (380K) e @ProfessorPerfume (311K) construíram autoridade educando sobre fragrâncias antes de vender. Guias de notas, famílias, ocasiões — o tipo de conteúdo com maior taxa de salvamento no Instagram. Autoridade antes de venda.</div>
+        <div class="ref-conv"><div class="ref-conv-label">Convergência</div><div class="ref-conv-text">A formação em farmácia de Milena Baptista é a credencial que nenhum desses criadores tem. Série "Por Dentro da Fragrância" com autoridade técnica real.</div></div>
+      </div>
+      <div class="ref-card reveal">
+        <div class="ref-brand">Case 04 — Kayali / FORVR Mood</div>
+        <div class="ref-title">Fundadora como prova de que o produto funciona</div>
+        <div class="ref-body">Huda Kattan (Kayali) e Jackie Aina (FORVR Mood): autoridade construída antes de vender, comunidade engajada, e a criadora como prova viva do produto. Jackie vendeu 25.000 unidades em 2 semanas no lançamento com base em autoridade prévia.</div>
+        <div class="ref-conv"><div class="ref-conv-label">Convergência</div><div class="ref-conv-text">A loja não vende perfume — as sócias usam, recomendam, explicam e são a prova de que o produto é de qualidade. Credencial pessoal transforma conteúdo em venda.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CALENDÁRIO ========== -->
+<section class="sec sec--bg" id="calendario">
+  <div class="w">
+    <div class="ey reveal">Calendário editorial</div>
+    <h2 class="h2 reveal">julho a dezembro.<br>cada mês tem<br>uma razão.</h2>
+    <div class="cal-grid">
+      <div class="cal-m reveal"><div class="cal-name">Julho</div><div class="cal-title">Encontro Mahogany Lovers</div><div class="cal-body">Evento de ativação exclusivo para a base de clientes. Mimos, curadoria com as sócias, histórias e novidades da marca.</div><div class="cal-tags"><span class="cal-tag">Evento</span><span class="cal-tag">CRM</span></div></div>
+      <div class="cal-m reveal"><div class="cal-name">Agosto</div><div class="cal-title">Dia dos Pais</div><div class="cal-body">12 de agosto. Principal data para perfumes masculinos. Série "presente para o pai que já tem tudo". Campanha de WhatsApp para base CRM.</div><div class="cal-tags"><span class="cal-tag">Dia dos Pais</span><span class="cal-tag">Masculino</span></div></div>
+      <div class="cal-m reveal"><div class="cal-name">Setembro</div><div class="cal-title">Autocuidado</div><div class="cal-body">Presente para si mesma. Campanha "você também merece" para a mulher que sempre presenteia os outros e nunca se presenteia.</div><div class="cal-tags"><span class="cal-tag">Autocuidado</span></div></div>
+      <div class="cal-m reveal"><div class="cal-name">Outubro</div><div class="cal-title">Aquecimento de Natal</div><div class="cal-body">Dia das Crianças (12/10). Início das campanhas de Natal — quem decide cedo. Lista de desejos Lovers. Kits já disponíveis.</div><div class="cal-tags"><span class="cal-tag">Crianças</span><span class="cal-tag">Natal early</span></div></div>
+      <div class="cal-m reveal"><div class="cal-name">Novembro</div><div class="cal-title">Black Friday</div><div class="cal-body">Maior data. Reativação de toda a base CRM. Kits com embalagem especial. Lovers ativados em primeiro acesso.</div><div class="cal-tags"><span class="cal-tag">Black Friday</span><span class="cal-tag">CRM</span></div></div>
+      <div class="cal-m reveal"><div class="cal-name">Dezembro</div><div class="cal-title">Natal — a maior campanha</div><div class="cal-body">Amigo secreto, Natal, Ano Novo. Curadoria por perfil. Kit corporativo. Segundo Encontro Mahogany Lovers de encerramento.</div><div class="cal-tags"><span class="cal-tag">Natal</span><span class="cal-tag">Corporativo</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EVENTO ========== -->
+<section class="sec" id="evento">
+  <div class="w">
+    <div class="ey reveal">Evento de ativação — Julho</div>
+    <h2 class="h2 reveal">encontro<br>mahogany lovers.</h2>
+    <p class="lead reveal">Uma noite em que as maiores fãs da marca vão trocar histórias, falar sobre suas experiências e conhecer as principais novidades. O valor está na exclusividade e no carinho — não em produção cara.</p>
+    <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:3px;align-items:start;margin-top:56px">
+      <div style="background:var(--ink);padding:48px" class="reveal">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px">Por que fazer</div>
+        <div style="font-family:'DM Serif Display',Georgia,serif;font-size:clamp(18px,2.2vw,26px);text-transform:uppercase;letter-spacing:.02em;line-height:1.2;color:var(--white);margin-bottom:20px">Uma noite de pertencimento.</div>
+        <div style="font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:32px">Reativa a base, gera conteúdo orgânico real e posiciona a loja como destino — não como ponto de venda. Evento de baixo custo, alto valor percebido.</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:13px;color:rgba(255,255,255,.5);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:rgba(255,255,255,.3)">→</span>Reativa clientes que não voltam há 3+ meses</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:rgba(255,255,255,.3)">→</span>Gera stories e reels do evento com autenticidade</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:rgba(255,255,255,.3)">→</span>Curadoria das sócias como experiência, não como venda</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:rgba(255,255,255,.3)">→</span>Amostra ou cartão à mão: brinde viável, valor percebido alto</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-45);margin-bottom:16px">Estrutura — começo, meio e fim</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--ink-08)"><div style="font-size:11px;font-weight:700;color:var(--ink-45);white-space:nowrap;width:56px;flex-shrink:0;padding-top:2px">19h00</div><div><div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px">Recepção com ritual olfativo</div><div style="font-size:12px;color:var(--ink-45);line-height:1.4">Cada cliente escolhe uma nota de entrada. Cria engajamento imediato e ponto de partida para curadoria.</div></div></div>
+          <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--ink-08)"><div style="font-size:11px;font-weight:700;color:var(--ink-45);white-space:nowrap;width:56px;flex-shrink:0;padding-top:2px">19h30</div><div><div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px">Apresentação das novidades</div><div style="font-size:12px;color:var(--ink-45);line-height:1.4">15 minutos. Tom de conversa, não de aula. Tendências de perfumaria e os perfumistas da Mahogany.</div></div></div>
+          <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--ink-08)"><div style="font-size:11px;font-weight:700;color:var(--ink-45);white-space:nowrap;width:56px;flex-shrink:0;padding-top:2px">20h00</div><div><div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px">Curadoria ao vivo</div><div style="font-size:12px;color:var(--ink-45);line-height:1.4">A indicação feita exclusivamente para cada cliente — como uma playlist curada. Personalização percebida aumenta a propensão de compra.</div></div></div>
+          <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--ink-08)"><div style="font-size:11px;font-weight:700;color:var(--ink-45);white-space:nowrap;width:56px;flex-shrink:0;padding-top:2px">20h30</div><div><div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px">Troca de histórias</div><div style="font-size:12px;color:var(--ink-45);line-height:1.4">Cada presente que marcou, cada memória olfativa. Esse é o conteúdo do evento — não o produto.</div></div></div>
+          <div style="display:flex;gap:16px;padding:16px 0"><div style="font-size:11px;font-weight:700;color:var(--ink-45);white-space:nowrap;width:56px;flex-shrink:0;padding-top:2px">21h00</div><div><div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px">Brinde e encerramento</div><div style="font-size:12px;color:var(--ink-45);line-height:1.4">Amostra + cartão escrito à mão. Foto coletiva para stories. Cada cliente sai sentindo que foi vista.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EMBAIXADORAS ========== -->
+<section class="sec sec--bg" id="embaixadoras">
+  <div class="w">
+    <div class="ey reveal">Programa exclusivo</div>
+    <h2 class="h2 reveal">Embaixadoras<br>Mahogany Curitiba.</h2>
+    <p class="lead reveal">Formalizar clientes recorrentes e engajadas como embaixadoras da loja. Sem custo de mídia. Com alcance real. Elas já amam a marca — o que falta é um nome, um critério e um gesto de carinho.</p>
+    <div class="g2" style="margin-top:56px">
+      <div class="g2 reveal" style="gap:2px">
+        <div class="card">
+          <div class="card-label">O que é</div>
+          <div class="card-title">Clientes que já amam viram voz da marca.</div>
+          <div class="card-body" style="margin-top:8px">Mulheres fiéis e comunicativas que já recomendam a Mahogany naturalmente. A proposta é reconhecê-las oficialmente — com critérios claros e um gesto de atenção.</div>
+        </div>
+        <div class="card card--dk">
+          <div class="card-label">Por que funciona</div>
+          <div class="card-title" style="color:var(--white)">Reconhecimento vale mais que desconto.</div>
+          <div class="card-body" style="margin-top:8px">Mulheres de 40 a 80 anos querem ser vistas, não descontadas. Um título e um gesto de carinho valem mais que percentual. Rede real, conversa presencial, credibilidade entre pares.</div>
+        </div>
+        <div class="card sp2">
+          <div class="card-label">Critérios de seleção</div>
+          <div style="display:flex;flex-direction:column;gap:0;margin-top:8px">
+            <div class="emb-crit"><div class="emb-dot"></div><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Compra frequente — ao menos 3x nos últimos 12 meses</div></div>
+            <div class="emb-crit"><div class="emb-dot"></div><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Já indicou a loja para outras pessoas</div></div>
+            <div class="emb-crit"><div class="emb-dot"></div><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Comunicativa — conta histórias de uso no atendimento</div></div>
+            <div class="emb-crit" style="border-bottom:none"><div class="emb-dot"></div><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Cadastrada e ativa no Mahogany Lovers</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal" style="display:flex;flex-direction:column;gap:0;padding:0">
+        <div style="padding:28px 32px;border-bottom:1px solid var(--ink-08)"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin-bottom:12px">O que elas recebem</div></div>
+        <div style="padding:16px 32px;border-bottom:1px solid var(--ink-08)"><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Convite exclusivo para eventos e lançamentos da loja</div></div>
+        <div style="padding:16px 32px;border-bottom:1px solid var(--ink-08)"><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Mini amostra ou produto surpresa no aniversário</div></div>
+        <div style="padding:16px 32px;border-bottom:1px solid var(--ink-08)"><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Acesso antecipado a novidades antes de qualquer outra cliente</div></div>
+        <div style="padding:16px 32px;border-bottom:1px solid var(--ink-08)"><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Carta personalizada reconhecendo a fidelidade</div></div>
+        <div style="padding:16px 32px"><div style="font-size:13px;color:var(--ink-70);line-height:1.5">Menção nas redes (com autorização) como "Embaixadora Mahogany CWB"</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PLAYBOOKS ========== -->
+<section class="sec" id="playbooks">
+  <div class="w">
+    <div class="ey reveal">Replicação e padronização</div>
+    <h2 class="h2 reveal">Playbooks que<br>funcionam sem<br>a Hub.</h2>
+    <p class="lead reveal">O sistema não pode depender da Hub para sempre. A partir dos primeiros 90 dias, cada processo vira um playbook que a franquia executa com autonomia.</p>
+    <div class="g2" style="margin-top:56px">
+      <div class="pb reveal"><div class="pb-n">Playbook 01</div><div class="pb-t">Encontro Mahogany Lovers</div><div class="pb-b">Roteiro completo: convites, lista, estrutura começo/meio/fim, curadoria de produtos, brinde, captura de conteúdo e follow-up. Qualquer edição futura parte do mesmo script.</div></div>
+      <div class="pb reveal"><div class="pb-n">Playbook 02</div><div class="pb-t">Grade Editorial Semanal</div><div class="pb-b">Template das 5 editorias, rotina de stories, modelo de CTA por formato, padrão de qualidade visual. A consistência vem do sistema, não do esforço diário.</div></div>
+      <div class="pb reveal"><div class="pb-n">Playbook 03</div><div class="pb-t">Atendimento e CRM</div><div class="pb-b">Script de WhatsApp por perfil, régua de recompra por data, protocolo de ouvir a história antes de vender, entrada de novos clientes no CRM. Opera mesmo sem as sócias disponíveis.</div></div>
+      <div class="pb reveal"><div class="pb-n">Playbook 04</div><div class="pb-t">Programa Embaixadoras</div><div class="pb-b">Critérios de seleção, processo de convite, o que cada embaixadora recebe, protocolo de reconhecimento, como medir o impacto de indicações. Clientes fiéis viram divulgadoras.</div></div>
+    </div>
+    <div style="background:var(--bg);padding:40px;margin-top:2px" class="reveal">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+        <div><div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-45);margin-bottom:10px">Por que playbook importa</div><div style="font-size:15px;font-weight:300;line-height:1.75;color:var(--ink-70)">Sem playbook, quando a Hub sai, o sistema some. Com playbook, a franquia tem autonomia real — e o que foi construído pode ser replicado.</div></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:13px;color:var(--ink-70);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-45)">→</span>Entregue ao final da fase que o gerou</div>
+          <div style="font-size:13px;color:var(--ink-70);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-45)">→</span>Validado com as sócias antes de finalizar</div>
+          <div style="font-size:13px;color:var(--ink-70);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-45)">→</span>Formato simples: checklist + exemplo + padrão visual</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PLANO ========== -->
+<section class="sec sec--bg" id="plano">
+  <div class="w">
+    <div class="ey reveal">Plano de ação</div>
+    <h2 class="h2 reveal">90 dias em<br>módulos.</h2>
+    <p class="lead reveal">Executado em módulos — não tudo de uma vez. Checkpoint mensal de 2 horas. Acompanhamento ao longo do mês via grupo de WhatsApp. A IA acelera. O humano decide.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px;margin-bottom:2px">
+      <div style="background:var(--white);padding:40px" class="reveal">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);margin-bottom:16px">Hub — responsabilidades</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;border-bottom:1px solid var(--ink-08);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Arquitetura do sistema e definição de missões</div>
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;border-bottom:1px solid var(--ink-08);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Checkpoint mensal de 2h — próximas missões</div>
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;border-bottom:1px solid var(--ink-08);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Acompanhamento contínuo via WhatsApp</div>
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;border-bottom:1px solid var(--ink-08);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Produção de conteúdo no mês 1 para estabelecer o padrão</div>
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Entrega de playbooks ao final de cada fase</div>
+        </div>
+      </div>
+      <div style="background:var(--white);padding:40px" class="reveal">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);margin-bottom:16px">Franquia — responsabilidades</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;border-bottom:1px solid var(--ink-08);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Executar missões de cada módulo no prazo</div>
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;border-bottom:1px solid var(--ink-08);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Validar e ajustar materiais enviados pela Hub</div>
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;border-bottom:1px solid var(--ink-08);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Alimentar CRM e registrar dados de venda</div>
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;border-bottom:1px solid var(--ink-08);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>Participar ativamente do grupo de WhatsApp</div>
+          <div style="font-size:13px;color:var(--ink-70);padding:10px 0;padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--ink-20)">→</span>A partir do mês 2: executar com autonomia pelos playbooks</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px" class="reveal">
+      <div class="fase">
+        <div class="fase-hd"><div class="fase-per">Módulo 01</div><div class="fase-num">0–30d</div><div class="fase-tit">Fundação + padrão</div></div>
+        <div class="fase-miss">Missão: arrumar a casa e produzir o padrão</div>
+        <div class="fase-items">
+          <div class="fase-row"><div class="fase-who hub">Hub</div><div class="fase-text">Imersão de fundação — posicionamento, métricas, grade editorial</div></div>
+          <div class="fase-row"><div class="fase-who hub">Hub</div><div class="fase-text">Produção dos primeiros conteúdos para estabelecer padrão visual</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Auditar e segmentar base do CRM</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Nomear e planejar o Encontro Mahogany Lovers de julho</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Definir critérios e primeiras embaixadoras</div></div>
+          <div class="fase-row"><div class="fase-who hub">Ambos</div><div class="fase-text">Checkpoint — 2h — apresentação do módulo 02</div></div>
+        </div>
+      </div>
+      <div class="fase" style="border-left:2px solid var(--ink-20);border-right:2px solid var(--ink-20)">
+        <div class="fase-hd"><div class="fase-per">Módulo 02</div><div class="fase-num">30–60d</div><div class="fase-tit">Ativação</div></div>
+        <div class="fase-miss">Missão: grade no ar + evento + CRM ativo</div>
+        <div class="fase-items">
+          <div class="fase-row"><div class="fase-who hub">Hub</div><div class="fase-text">Acompanhamento da grade por WhatsApp</div></div>
+          <div class="fase-row"><div class="fase-who hub">Hub</div><div class="fase-text">Revisão de métricas quinzenal</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Realizar o Encontro Mahogany Lovers</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Ativar régua de CRM por ocasião</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Publicar grade com autonomia crescente</div></div>
+          <div class="fase-row"><div class="fase-who hub">Ambos</div><div class="fase-text">Checkpoint — 2h — apresentação do módulo 03</div></div>
+        </div>
+      </div>
+      <div class="fase">
+        <div class="fase-hd"><div class="fase-per">Módulo 03</div><div class="fase-num">60–90d</div><div class="fase-tit">Prova + escala</div></div>
+        <div class="fase-miss">Missão: consolidar dados e preparar Q4</div>
+        <div class="fase-items">
+          <div class="fase-row"><div class="fase-who hub">Hub</div><div class="fase-text">Consolidar métricas e aprendizados dos 90 dias</div></div>
+          <div class="fase-row"><div class="fase-who hub">Hub</div><div class="fase-text">Entregar playbooks finais — grade, evento, CRM, embaixadoras</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Executar com autonomia guiada pelos playbooks</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Aquecimento Black November e Natal</div></div>
+          <div class="fase-row"><div class="fase-who fr">Franquia</div><div class="fase-text">Lançar programa Embaixadoras</div></div>
+          <div class="fase-row"><div class="fase-who hub">Ambos</div><div class="fase-text">Checkpoint final — 2h — planejamento outubro a dezembro</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MÉTRICAS ========== -->
+<section class="sec" id="metricas">
+  <div class="w">
+    <div class="ey reveal">Métricas de acompanhamento</div>
+    <h2 class="h2 reveal">o que medimos<br>toda semana.</h2>
+    <p class="lead reveal">Seguidores não entram aqui. Cada métrica tem relação direta com intenção de compra, venda ou reativação.</p>
+    <div class="g4" style="margin-top:48px">
+      <div class="met reveal"><div class="met-icon">&#9632;</div><div class="met-t">WhatsApp qualificado</div><div class="met-b">Volume originado por conteúdo ou CRM. Conversas com intenção de compra.</div></div>
+      <div class="met reveal"><div class="met-icon">&#9632;</div><div class="met-t">Visitas atribuídas</div><div class="met-b">Clientes que vieram por conteúdo ou ativação de CRM, não fluxo espontâneo.</div></div>
+      <div class="met reveal"><div class="met-icon">&#9632;</div><div class="met-t">Venda por campanha</div><div class="met-b">Qual conteúdo gerou qual venda. Rastreamento na origem.</div></div>
+      <div class="met reveal"><div class="met-icon">&#9632;</div><div class="met-t">Novos cadastros CRM</div><div class="met-b">Crescimento da base ativa semana a semana. Todo atendimento gera cadastro.</div></div>
+      <div class="met reveal"><div class="met-icon">&#9632;</div><div class="met-t">Recompra</div><div class="met-b">Clientes que voltaram após ativação de régua CRM. Separar espontânea de estimulada.</div></div>
+      <div class="met reveal"><div class="met-icon">&#9632;</div><div class="met-t">Produtos mais pedidos</div><div class="met-b">Para calibrar estoque e conteúdo no próximo ciclo.</div></div>
+      <div class="met reveal"><div class="met-icon">&#9632;</div><div class="met-t">Interesse em revenda</div><div class="met-b">Leads para canal de revendedoras. Perfil, origem, estágio.</div></div>
+      <div class="met reveal"><div class="met-icon">&#9632;</div><div class="met-t">NPS informal</div><div class="met-b">"Indicaria nossa curadoria?" — para quem presenteou. Via WhatsApp pós-compra.</div></div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="ft">
+    <div class="ft-b">Hub<span>.41</span> + Mahogany Curitiba</div>
+    <div class="ft-n">Sistema Operacional Hub — Junho 2026</div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') });
+}, {threshold:0.08, rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.reveal').forEach((el,i) => {
+  const parent = el.parentElement;
+  const sibs = Array.from(parent.querySelectorAll(':scope > .reveal'));
+  const idx = sibs.indexOf(el);
+  if(idx > 0) el.style.transitionDelay = `${Math.min(idx,5)*65}ms`;
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
